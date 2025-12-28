@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test App 1</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='test1.js') }}" defer></script>
+</head>
+<body>
+
+<div class="app-card">
+    <div class="app-title">🧪 Test App 1</div>
+    <div class="app-subtitle">
+        This page is served through <strong>/app1</strong>
+    </div>
+
+    <button id="test1-btn" class="primary-btn">
+        Click Test1 Button
+    </button>
+
+    <div class="divider"></div>
+
+    <div class="nav">
+        <a href="/app2/">→ Test App 2</a>
+        <a href="/">← Gateway</a>
+    </div>
+</div>
+
+</body>
+</html>

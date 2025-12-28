@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <!-- 手机适配 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gateway Home</title>
+      <link rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}">
+    <script>
+window.addEventListener("load", () => {
+    document.querySelectorAll("a[data-health]").forEach(link => {
+        const statusEl = link.querySelector(".status");
+        const url = link.dataset.health;
+
+        statusEl.textContent = "⏳ Checking";
+
+        fetch(url)
+            .then(res => {
+                statusEl.textContent = "HTTP " + res.status;
+                if (!res.ok) throw new Error();
+                statusEl.textContent = "● Running";
+                statusEl.className = "status running";
+            })
+            .catch(() => {
+                statusEl.textContent = "● Down";
+                statusEl.className = "status down";
+            });
+    });
+});
+</script>
+
+</head>
+<body>
+<div class="card">
+    <h1>🚪 Gateway</h1>
+    <p>This is the single entry point (port 5000).</p>
+
+    <h3>Available Applications</h3>
+<!--    <a href="/app1/">▶ Open Test App 1</a>-->
+<!--    <a href="/app2/">▶ Open Test App 2</a>-->
+<!--    <a href="/app3/">▶ Open Test App 3</a>-->
+
+<!--    <a href="/app1/" target="_blank">▶ Open Test App 1</a>-->
+<!--    <a href="/app2/" target="_blank">▶ Open Test App 2</a>-->
+<!--    <a href="/app3/" target="_blank">▶ Open Test App 3</a>-->
+    <a href="/app1/" target="_blank" rel="noopener noreferrer" data-health="/app1/health">
+    ▶ Open Test App 1
+    <span class="status">Checking...</span>
+</a>
+
+<a href="/app2/" target="_blank" rel="noopener noreferrer" data-health="/app2/health">
+    ▶ Open Test App 2
+    <span class="status">Checking...</span>
+</a>
+
+<a href="/app3/" target="_blank" rel="noopener noreferrer" data-health="/app3/health">
+    ▶ Open Test App 3
+    <span class="status">Checking...</span>
+</a>
+
+</div>
+</body>
+</html>
